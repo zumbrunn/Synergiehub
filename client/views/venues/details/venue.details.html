@@ -1,0 +1,168 @@
+<template name="venueDetails">
+	<div class="container-sm">
+		{{#if editing}}
+			{{> venueEdit venue}}
+		{{else}}
+			{{#with venue}}
+				<div class="page-component">
+					<div class="details-header location-details-header">
+						{{#if picture}}
+							<img src="{{picture}}">
+						{{/if}}
+						<h3>
+							{{name}}
+							{{#if short}}
+								<small>{{short}}</small>
+							{{/if}}
+						</h3>
+						<p>{{{description}}}</p>
+					</div>
+
+					<div class="details-body location-details-body">
+						<div class="details-content">
+							{{#if loc}}
+								<div class="details-map">
+									{{> map markers=markers}}
+									<div class="coordinates">
+										{{coords}}
+									</div>
+								</div>
+							{{/if}}
+							{{#if editor}}
+								<p>
+									<span class="venue-property-title">{{mf 'location.details.hosts' 'Hosts:'}}</span>
+									<ul class='hosts'>
+										<li>
+											{{>profilelink editor}}
+										</li>
+									</ul>
+								</p>
+							{{/if}}
+							{{#if contact.web}}
+								<p>
+									<span class="venue-property-title">
+										{{mf 'location.details.online' 'Website:'}}
+									</span>
+									<a href="{{contact.web}}">{{contact.web}}</a>
+								</p>
+							{{/if}}
+							{{#if address}}
+								<p>
+									<span class="venue-property-title">
+										{{mf 'venue.details.address' 'Address:'}}
+									</span>
+									{{address}}
+								</p>
+							{{/if}}
+							{{#if route}}
+								<p>
+									<span class="venue-property-title">
+										{{mf 'venue.details.route' 'How to go there:'}}
+									</span>
+									<br>
+									{{route}}
+								</p>
+							{{/if}}
+							{{#if maxPeople}}
+								<p>
+									<span class="venue-property-title">
+										{{mf 'venue.details.max_ppl' 'Maximum People:'}}
+									</span>
+									{{maxPeople}}
+								</p>
+							{{/if}}
+							{{#if maxWorkplaces}}
+								<p>
+									<span class="venue-property-title">
+										{{mf 'venue.details.max_workplaces' 'Maximum Workplaces:'}}
+									</span>
+									{{maxWorkplaces}}
+								</p>
+							{{/if}}
+							{{#if facilityNames}}
+								<p>
+									<span class="venue-property-title">
+										{{mf 'venue.details.availableInfrastructure' 'Available infrastructure:'}}
+									</span>
+									<ul>
+										{{#each facilityNames}}
+											<li>{{this}}</li>
+										{{/each}}
+									</ul>
+								</p>
+							{{/if}}
+							{{#if otherFacilities}}
+								<p>
+									<span class="venue-property-title">
+										{{mf 'venue.details.additionalEquipment' 'Additional equipment:'}}
+									</span>
+									<br>
+									{{otherFacilities}}
+								</p>
+							{{/if}}
+						</div>
+					</div>
+					{{#if mayEdit}}
+						<div class="actions">
+							{{> buttonEdit event="js-venue-edit"}}
+							{{#unless verifyDelete}}
+								{{> buttonDelete event="js-venue-delete"}}
+							{{/unless}}
+						</div>
+						{{#if verifyDelete}}
+							{{> venueDeleteConfirmDialog}}
+						{{/if}}
+					{{/if}}
+				</div>
+			{{/with}}
+		{{/if}}
+		{{#if events}}
+			<div class="page-component">
+				<h2>{{mf 'venue.details.upcomingEvents' "Upcoming events at this venue: "}}</h2>
+				{{> eventList dataEvents=events withDate=true}}
+				{{#if eventsLimited}}
+					<div class="clearfix"></div>
+					<button type="button" class="btn btn-add js-show-more-events">
+						{{#mf KEY='venue.details.showMoreEvents' NUM=unloadedEvents}}
+							Show {NUM, plural,
+								one {one more event}
+								other {# more events}
+							}
+						{{/mf}}
+					</button>
+				{{/if}}
+			</div>
+		{{/if}}
+		{{#if pastEvents}}
+			<div class="page-component">
+				<h2>Past events:</h2>
+				{{> eventList dataEvents=pastEvents withDate=true}}
+				{{#if pastEventsLimited}}
+					<div class="clearfix"></div>
+					<button type="button" class="btn btn-add js-show-more-past-events">
+						{{#mf KEY='venue.details.showMorePastEvents' NUM=unloadedPastEvents}}
+							Show {NUM, plural,
+								one {one more event}
+								other {# more events}
+							}
+						{{/mf}}
+					</button>
+				{{/if}}
+			</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="venueDeleteConfirmDialog">
+	<div class="venue-delete-confirmation">
+		<p>{{mf 'venue.reallydelete' 'Please confirm that you would like to delete this venue. This cannot be undone.'}}</p>
+		<div class="form-actions">
+			{{> buttonDeleteConfirm
+				event="js-venue-delete-confirm"
+				textIdle=(mf 'venue.detail.remove' 'Remove this venue')
+				textBusy=(mf 'venue.detail.remove.busy' 'Deleting venue...')
+			}}
+			{{> buttonCancel event="js-venue-delete-cancel"}}
+		</div>
+	</div>
+</template>
