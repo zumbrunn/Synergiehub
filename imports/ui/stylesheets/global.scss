@@ -1,0 +1,80 @@
+.admin-active-task {
+	margin-top: 15px;
+}
+
+.admin-back-to-dashboard > i {
+	@include td-margin(right, 5px);
+}
+
+.checkmark {
+	@include td-padding(left, 5px);
+	color: $green-dark;
+}
+
+.profilelink {
+	@include td-padding(right, 5px);
+	color: $gray-dark;
+
+	&:hover {
+		color: $brand-primary;
+		text-decoration: none;
+	}
+}
+
+.datepicker {
+	z-index: $zindex-navbar-fixed + 1;
+}
+
+.datepicker-dropdown.datepicker-orient-top::after {
+	border-top-color: $dropdown-bg;
+}
+
+.leaflet-top {
+	z-index: auto;
+}
+
+select:hover {
+	cursor: pointer;
+}
+
+.select-placeholder:hover {
+	cursor: not-allowed;
+}
+
+.input-group input:focus {
+	z-index: 3;
+}
+
+.input-lg {
+	border-radius: 4px;
+}
+
+a:hover,
+.btn-link:hover {
+	text-decoration: none;
+}
+
+.course-compact.elevate-child,
+.course-compact.elevate-child:hover {
+	box-shadow: none;
+	transition: box-shadow $default-transition-time;
+}
+
+.collapsing,
+.fade {
+	transition-duration: 0s;
+}
+
+.medium-editor-placeholder:hover {
+	cursor: text;
+}
+
+.medium-editor-placeholder::after {
+	font-style: normal;
+	position: relative;
+	white-space: normal;
+}
+
+.disabled label {
+	color: $gray-light;
+}

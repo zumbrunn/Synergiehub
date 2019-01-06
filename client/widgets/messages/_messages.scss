@@ -1,7 +1,0 @@
-.messages {
-	bottom: 0;
-	@include td-float(right);
-	position: fixed;
-	@include td-pos(right, 15px);
-	z-index: 9999;
-}

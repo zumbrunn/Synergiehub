@@ -1,0 +1,120 @@
+.course-members {
+	font-size: medium;
+	margin-top: $course-details-seperator-height;
+}
+
+.contact-members {
+	@include td-float(right);
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.course-member {
+	background: $course-page-component-bg;
+	padding: 10px ($grid-gutter-width / 2);
+
+	&.is-own-user {
+		background: $user-bg;
+    }
+}
+
+.course-member + .course-member {
+	margin-top: $course-details-seperator-height;
+}
+
+.course-member-roles {
+	@include td-margin(left, 10px);
+	@include td-padding(left, 0);
+	display: inline-block;
+	list-style: none;
+	margin-bottom: 0;
+
+	&:hover {
+		cursor: default;
+	}
+}
+
+.course-member-roles > li {
+	display: inline-block;
+
+	&.participant {
+		display: none;
+	}
+}
+
+.course-member-role {
+	background: $blue;
+	padding: 3px 6px 5px;
+	vertical-align: middle;
+}
+
+.course-member-role-text {
+	color: $white;
+	font-size: small;
+	font-weight: bold;
+}
+
+.team .course-member-role {
+	padding-right: 0;
+}
+
+.role-short {
+	text-transform: uppercase;
+}
+
+.js-add-to-team-btn {
+	@include td-margin(left, 6px);
+	padding: 2px 6px;
+}
+
+.remove-team-btn {
+	background: $blue;
+	border: 0;
+	color: $white;
+	margin: -2px;
+	padding: 2px;
+	vertical-align: baseline;
+
+	&:hover,
+	&:focus {
+		background: darken($blue, 10%);
+		border: 0;
+		color: $white;
+	}
+}
+
+.course-member-comment {
+	@include clearfix;
+	padding-top: 10px;
+	position: relative;
+}
+
+$course-member-comment-border-color: darken($blue-lighter, 20%);
+
+.course-member-comment-arrow {
+	border: 5px solid;
+	border-color: transparent transparent $course-member-comment-border-color;
+	height: 0;
+	left: 8.5px;
+	position: absolute;
+	top: 0;
+	width: 0;
+}
+
+.course-member-comment-body {
+	@include td-float(left);
+	background-color: lighten($blue-lighter, 6%);
+	border: 1px solid $course-member-comment-border-color;
+	border-radius: 3px;
+	font-size: $font-size-base;
+	max-width: 100%;
+	overflow: hidden;
+	padding: 5px 10px;
+	word-wrap: break-word;
+}
+
+.course-member-comment .editable {
+	@include td-padding(left, 0);
+}
